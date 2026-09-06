@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
 @import "@fontsource/inter/300.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
@@ -13,9 +11,9 @@
     --sab: env(safe-area-inset-bottom, 0px);
     --sal: env(safe-area-inset-left, 0px);
 
-    /* Refined Luxury Material Palette */
-    --color-canvas: #F4F3EF;
-    --color-graphite-primary: #191B1C;
+    /* Warm v19 product palette */
+    --color-canvas: #F7F1E8;
+    --color-graphite-primary: #2A2521;
     --color-graphite-secondary: #232627;
     --color-text-on-dark: #F2F1ED;
     --color-mineral: #E7E7E3;
@@ -48,8 +46,8 @@
 
   body {
     margin: 0;
-    background-color: #F4F3EF;
-    color: #191B1C;
+    background-color: #F7F1E8;
+    color: #2A2521;
     overscroll-behavior-y: none;
     -webkit-text-size-adjust: 100%;
   }
@@ -60,11 +58,11 @@
   color: #F2F1ED;
 }
 
-/* Luxury Editorial Display font — Instrument Serif */
+/* v19 uses one highly legible UI family throughout. */
 .font-display {
-  font-family: "Instrument Serif", Newsreader, Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.035em;
 }
 
 /* Functional UI font — Inter with crisp geometric numbers */
@@ -96,6 +94,161 @@
 .btn-tactile:active {
   transform: scale(0.985);
   opacity: 0.93;
+}
+
+@layer components {
+  .v19-screen {
+    width: 100%;
+    max-width: 28rem;
+    margin-inline: auto;
+    padding: 1rem 1.125rem 2rem;
+    color: #2A2521;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .v19-header {
+    min-height: 4.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: .25rem;
+  }
+
+  .v19-header h1 {
+    margin-top: .2rem;
+    font-size: 1.65rem;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -.035em;
+  }
+
+  .v19-eyebrow {
+    font-size: .625rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: #77716A;
+  }
+
+  .v19-card {
+    border: 1px solid #E5DACB;
+    border-radius: 1.25rem;
+    background: #FFFDF8;
+    padding: 1rem;
+    box-shadow: 0 8px 28px rgba(74, 57, 43, .055);
+  }
+
+  .v19-card-accent {
+    border-color: #E8C9B8;
+    background: #FFF7ED;
+  }
+
+  .v19-card-green {
+    border-color: #C9DED3;
+    background: #EDF6F1;
+  }
+
+  .v19-body {
+    font-size: .8125rem;
+    line-height: 1.55;
+    color: #6B645E;
+  }
+
+  .v19-caption {
+    font-size: .6875rem;
+    line-height: 1.25;
+    color: #837B73;
+  }
+
+  .v19-primary-button {
+    min-height: 3.25rem;
+    width: 100%;
+    border-radius: .9rem;
+    background: #24584A;
+    color: #FFFFFF;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    font-size: .875rem;
+    font-weight: 700;
+    box-shadow: 0 7px 18px rgba(36, 88, 74, .18);
+  }
+
+  .v19-primary-button svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .v19-icon-tile {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 auto;
+    border-radius: .9rem;
+    background: #F1EADF;
+    color: #5F5851;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .v19-icon-tile svg,
+  .v19-small-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .v19-small-icon {
+    width: 2.35rem;
+    height: 2.35rem;
+    flex: 0 0 auto;
+    border-radius: .75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .v19-stat {
+    min-height: 6rem;
+    border: 1px solid #E5DACB;
+    border-radius: 1rem;
+    background: #FFFDF8;
+    padding: .9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .v19-stat strong {
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .v19-stat span {
+    font-size: .6875rem;
+    line-height: 1.25;
+    color: #77716A;
+  }
+
+  .v19-details {
+    border-top: 1px solid #E5DACB;
+    padding-top: .5rem;
+  }
+
+  .v19-details summary {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: 650;
+    color: #6B645E;
+  }
 }
 
 /* Keyboard access without changing the quiet visual language for pointer users. */

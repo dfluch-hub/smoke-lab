@@ -25,6 +25,9 @@ import { QuickSmokingLogModal } from './components/smoking/QuickSmokingLogModal'
 import { LapseRecoveryModal } from './components/quit/LapseRecoveryModal';
 import { QuitSupportRepository, LapseRecoveryRepository } from './storage/repositories';
 import { PostSmokingFlowEngine } from './services/behavior/PostSmokingFlowEngine';
+import { SmokingDashboard } from './components/smoking/SmokingDashboard';
+import { PatternDashboard } from './components/patterns/PatternDashboard';
+import { ProgressDashboard } from './components/progress/ProgressDashboard';
 
 function AppContent() {
   const { t, locale } = useLanguage();
@@ -136,8 +139,8 @@ function AppContent() {
   // If user hasn't completed onboarding, show Onboarding Flow
   if (!profile || !profile.onboardingCompleted) {
     return (
-      <main className="min-h-[100dvh] w-full bg-[#E7E7E3] flex items-center justify-center sm:py-6">
-        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[820px] sm:max-h-[920px] bg-[#F4F3EF] sm:rounded-[28px] sm:shadow-[0_16px_48px_rgba(25,27,28,0.08)] sm:border sm:border-[#D9D9D4] overflow-hidden flex flex-col relative pt-[env(safe-area-inset-top)] sm:pt-0">
+      <main className="min-h-[100dvh] w-full bg-[#E9E0D4] flex items-center justify-center sm:py-6">
+        <div className="w-full max-w-md min-h-[100dvh] sm:min-h-[820px] sm:max-h-[920px] bg-[#F7F1E8] sm:rounded-[28px] sm:shadow-[0_16px_48px_rgba(74,57,43,0.10)] sm:border sm:border-[#E5DACB] overflow-hidden flex flex-col relative pt-[env(safe-area-inset-top)] sm:pt-0">
           <OfflineIndicator />
           <PWAUpdatePrompt />
           {storageIssue && <StorageIssueBanner />}
@@ -149,10 +152,10 @@ function AppContent() {
 
   // Main Mobile App Shell
   return (
-    <div className="min-h-[100dvh] w-full bg-[#E7E7E3] flex items-center justify-center sm:py-6">
+    <div className="min-h-[100dvh] w-full bg-[#E9E0D4] flex items-center justify-center sm:py-6">
       <a href="#main-content" className="skip-link">{t('skipToContent')}</a>
       {/* Mobile container - iPhone sized frame on large screens, native full viewport on mobile */}
-      <div ref={appShellRef} className="w-full max-w-md min-h-[100dvh] sm:min-h-[820px] sm:max-h-[920px] bg-[#F4F3EF] sm:rounded-[28px] sm:shadow-[0_16px_48px_rgba(25,27,28,0.08)] sm:border sm:border-[#D9D9D4] overflow-y-auto flex flex-col relative pt-[env(safe-area-inset-top)] sm:pt-0">
+      <div ref={appShellRef} className="w-full max-w-md min-h-[100dvh] sm:min-h-[820px] sm:max-h-[920px] bg-[#F7F1E8] sm:rounded-[28px] sm:shadow-[0_16px_48px_rgba(74,57,43,0.10)] sm:border sm:border-[#E5DACB] overflow-x-hidden overflow-y-auto flex flex-col relative pt-[env(safe-area-inset-top)] sm:pt-0">
         <OfflineIndicator />
         <PWAUpdatePrompt />
         {storageIssue && <StorageIssueBanner />}
@@ -171,7 +174,24 @@ function AppContent() {
             />
           )}
 
-          {activeTab !== 'TODAY' && (
+          {activeTab === 'SMOKING' && (
+            <SmokingDashboard dataVersion={dataVersion} onLogSmoking={() => setShowQuickSmokingLog(true)} />
+          )}
+
+          {activeTab === 'PATTERNS' && (
+            <PatternDashboard
+              userProfile={profile}
+              dataVersion={dataVersion}
+              onOpenCraving={() => setShowCravingMode(true)}
+              onOpenSmoking={() => setActiveTab('SMOKING')}
+            />
+          )}
+
+          {activeTab === 'PROGRESS' && (
+            <ProgressDashboard userProfile={profile} dataVersion={dataVersion} onOpenSettings={() => setActiveTab('ME')} />
+          )}
+
+          {['LAB', 'ME'].includes(activeTab) && (
             <TabViews
               currentTab={activeTab}
               userProfile={profile}
@@ -184,25 +204,17 @@ function AppContent() {
 
         {/* Fixed Bottom Navigation */}
         <div
-          className="fixed sm:absolute left-0 right-0 z-30 mx-auto flex w-full max-w-md items-center gap-2 border-t border-[#D9D9D4] bg-[#F4F3EF]/97 px-[max(1rem,env(safe-area-inset-left))] py-2 backdrop-blur-md"
-          style={{ bottom: 'calc(max(0.8rem, env(safe-area-inset-bottom)) + 3.25rem)' }}
+          className="fixed sm:absolute left-0 right-0 z-30 mx-auto flex w-full max-w-md items-center border-t border-[#E5DACB] bg-[#FFFDF8]/97 px-[max(1rem,env(safe-area-inset-left))] py-2 backdrop-blur-xl"
+          style={{ bottom: 'calc(max(0.8rem, env(safe-area-inset-bottom)) + 4rem)' }}
           aria-label={locale === 'de' ? 'Schnellaktionen' : 'Quick actions'}
         >
           <button
             type="button"
             id="global-want-to-smoke"
             onClick={() => setShowCravingMode(true)}
-            className="btn-tactile min-h-12 flex-1 rounded-xl border border-[#B9BCBE] bg-[#E7E7E3] px-4 text-sm font-semibold text-[#191B1C]"
+            className="btn-tactile flex min-h-11 flex-1 items-center justify-center rounded-xl border border-[#E8C9B8] bg-[#FFF0E8] px-4 text-sm font-bold text-[#9A452F]"
           >
-            {t('actionWantToSmoke')}
-          </button>
-          <button
-            type="button"
-            id="global-i-smoked"
-            onClick={() => setShowQuickSmokingLog(true)}
-            className="btn-tactile min-h-12 rounded-xl px-3 text-xs font-semibold text-[#4E5253]"
-          >
-            {locale === 'de' ? '+ Geraucht' : '+ Smoked'}
+            {locale === 'de' ? 'Ich will gerade rauchen' : 'I want to smoke right now'}
           </button>
         </div>
 

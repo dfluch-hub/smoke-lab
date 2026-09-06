@@ -271,7 +271,7 @@ export interface LapseRecoveryRecord {
   note?: string;
 }
 
-export type TabId = 'TODAY' | 'LAB' | 'PATTERNS' | 'PROGRESS' | 'ME';
+export type TabId = 'TODAY' | 'SMOKING' | 'LAB' | 'PATTERNS' | 'PROGRESS' | 'ME';
 
 /**
  * Visual Foundation for Future Focused Craving Intervention Mode

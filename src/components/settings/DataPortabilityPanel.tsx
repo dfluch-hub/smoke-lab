@@ -148,7 +148,7 @@ export const DataPortabilityPanel: React.FC<{ userProfile: UserProfile }> = ({ u
                 <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Journey' : 'Journey'}</span><span>{de ? `Tag ${preview.journeyDay}` : `Day ${preview.journeyDay}`}</span></div>
                 <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Zigaretten-Logs' : 'Smoking logs'}</span><span>{preview.smokingEvents}</span></div>
                 <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Drang-Logs' : 'Craving logs'}</span><span>{preview.cravingEvents}</span></div>
-                <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Experimente' : 'Experiments'}</span><span>{preview.experiments}</span></div>
+                <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Persönliche Tests' : 'Personal tests'}</span><span>{preview.experiments}</span></div>
                 <div className="flex justify-between gap-4 px-3.5 py-2.5"><span className="text-[#747779]">{de ? 'Recovery-Einträge' : 'Recovery records'}</span><span>{preview.recoveries}</span></div>
               </div>
 
