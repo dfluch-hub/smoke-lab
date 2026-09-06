@@ -1,0 +1,67 @@
+name: Unpack SmokeLab ZIP
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find SmokeLab ZIP
+        id: find_zip
+        shell: bash
+        run: |
+          ZIP_FILE="$(find . -maxdepth 1 -type f \( -iname '*.zip' \) | head -n 1)"
+
+          if [ -z "$ZIP_FILE" ]; then
+            echo "No ZIP file found in repository root."
+            exit 1
+          fi
+
+          echo "zip_file=$ZIP_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Unpack ZIP
+        shell: bash
+        run: |
+          ZIP_FILE="${{ steps.find_zip.outputs.zip_file }}"
+
+          rm -rf _smokelab_unpack
+          mkdir _smokelab_unpack
+
+          unzip -q "$ZIP_FILE" -d _smokelab_unpack
+
+          shopt -s dotglob nullglob
+
+          ITEMS=(_smokelab_unpack/*)
+
+          if [ "${#ITEMS[@]}" -eq 1 ] && [ -d "${ITEMS[0]}" ]; then
+            cp -a "${ITEMS[0]}/." .
+          else
+            cp -a _smokelab_unpack/. .
+          fi
+
+          rm -rf _smokelab_unpack
+          rm -f "$ZIP_FILE"
+
+      - name: Commit unpacked SmokeLab files
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Import SmokeLab v17"
+          git push
