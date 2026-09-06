@@ -1,7 +1,7 @@
 {
   "name": "smoke-lab-pwa",
   "private": true,
-  "version": "0.18.0",
+  "version": "0.18.2",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -25,6 +25,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",

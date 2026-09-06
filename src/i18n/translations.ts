@@ -25,22 +25,22 @@ export const translations = {
 
     // Navigation
     navToday: 'Today',
-    navLab: 'Lab',
-    navPatterns: 'Patterns',
-    navProgress: 'Progress',
-    navMe: 'Me',
+    navLab: 'Plan',
+    navPatterns: 'Triggers',
+    navProgress: 'Review',
+    navMe: 'More',
 
     // Onboarding Screen 1
-    onboarding1Headline: "Don’t fight the cigarette.\nUnderstand the loop.",
-    onboarding1Supporting: 'Smoke Lab learns when, where and why you smoke — and helps you interrupt the moments that run on autopilot.',
-    onboarding1Cta: 'Start my Lab',
+    onboarding1Headline: "Understand your smoking.\nChange one moment at a time.",
+    onboarding1Supporting: 'Choose your goal. Smoke Lab then gives you one clear step each day.',
+    onboarding1Cta: 'Get started',
 
     // Onboarding Screen 2 - Baseline
-    onboardingStepBaseline: 'Baseline',
-    onboardingStepIntent: 'Intent',
-    onboardingStepTriggers: 'Triggers',
-    onboardingStepMindset: 'Mindset',
-    onboarding2Headline: 'Your starting point.',
+    onboardingStepBaseline: 'Starting point',
+    onboardingStepIntent: 'Goal',
+    onboardingStepTriggers: 'Situations',
+    onboardingStepMindset: 'Ready',
+    onboarding2Headline: 'Where are you now?',
     onboarding2CpdLabel: 'Cigarettes per day',
     onboarding2YearsLabel: 'Years smoking',
     onboarding2OptionalSection: 'Context',
@@ -52,13 +52,13 @@ export const translations = {
     onboarding2Cta: 'Continue',
 
     // Onboarding Screen 3 - Goal
-    onboarding3Headline: 'Primary intent.',
-    onboarding3Option1Title: 'Understand my pattern',
-    onboarding3Option1Desc: 'Map the cues, times, and emotional triggers behind each cigarette.',
+    onboarding3Headline: 'Where do you want to go?',
+    onboarding3Option1Title: 'Understand my triggers',
+    onboarding3Option1Desc: 'See when and why you smoke.',
     onboarding3Option2Title: 'Smoke less',
-    onboarding3Option2Desc: 'Insert pauses and reduce automatic cigarettes.',
+    onboarding3Option2Desc: 'Add pauses and reduce step by step.',
     onboarding3Option3Title: 'Quit smoking',
-    onboarding3Option3Desc: 'Systematically dismantle the loops toward complete freedom.',
+    onboarding3Option3Desc: 'Prepare and follow a quit plan.',
     onboarding3Supporting: 'You can adjust this anytime.',
 
     // Onboarding Screen 4 - Common Situations
@@ -77,10 +77,10 @@ export const translations = {
     situationOther: 'Other',
 
     // Onboarding Screen 5 - Observation Mindset
-    onboarding5Headline: 'First, we observe.',
-    onboarding5Copy: 'Do not force change on day one.\nSmoke Lab first learns your natural patterns.',
-    onboarding5Supporting: 'Observation is what disarms the reflex.',
-    onboarding5Cta: 'Enter Smoke Lab',
+    onboarding5Headline: 'You are ready.',
+    onboarding5Copy: 'Start with honest entries. Smoke Lab uses only what you record.',
+    onboarding5Supporting: 'Today, one real moment is enough.',
+    onboarding5Cta: 'Show today',
 
     // Today Screen
     dayDiscoverShort: 'Day 01 · Discover',
@@ -103,7 +103,7 @@ export const translations = {
     behaviorMetricBadge: 'Behavior metric',
 
     // Primary Action Area
-    actionWantToSmoke: 'I WANT TO SMOKE',
+    actionWantToSmoke: 'I want to smoke',
     actionWantToSmokeSubtitle: 'Notice the urge before you decide.',
     actionSmoked: 'I smoked',
     actionSmokedSubtitle: 'Log without judgement',
@@ -160,7 +160,7 @@ export const translations = {
     labPhase3Desc: 'Days 19–30. Delay expansion and automatic pattern replacement.',
 
     // Patterns Tab
-    patternsTabTitle: 'Pattern Intelligence',
+    patternsTabTitle: 'Triggers & situations',
     patternsTabSubtitle: 'Automated clustering of your smoking loops.',
     patternsTabBadge: 'Signals',
     patternsMetric1Val: '—',
@@ -172,7 +172,7 @@ export const translations = {
     trackedCues: 'Tracked cues',
 
     // Progress Tab
-    progressTabTitle: 'Progress Signals',
+    progressTabTitle: 'Your review',
     progressTabSubtitle: 'Changes in cravings and your Control Score over time.',
     progressTabBadge: 'Personal Analytics',
     progressMetric1Val: '50',
@@ -182,7 +182,7 @@ export const translations = {
     progressFeature1: 'Control Score trend',
 
     // Me Tab
-    meTabTitle: 'Profile & Settings',
+    meTabTitle: 'More',
     meTabBadge: 'On-device',
     meBaselineSection: 'Starting baseline',
     meCpdLabel: 'Typical cigarettes / day',
@@ -309,22 +309,22 @@ export const translations = {
 
     // Navigation
     navToday: 'Heute',
-    navLab: 'Labor',
-    navPatterns: 'Muster',
-    navProgress: 'Fortschritt',
-    navMe: 'Ich',
+    navLab: 'Plan',
+    navPatterns: 'Auslöser',
+    navProgress: 'Auswertung',
+    navMe: 'Mehr',
 
     // Onboarding Screen 1
-    onboarding1Headline: "Kämpfe nicht gegen die Zigarette.\nVerstehe die Schleife.",
-    onboarding1Supporting: 'Smoke Lab erkennt wann, wo und warum du rauchst — und hilft dir, Momente auf Autopilot gezielt zu unterbrechen.',
-    onboarding1Cta: 'Mein Labor starten',
+    onboarding1Headline: "Verstehe dein Rauchen.\nVerändere einen Moment nach dem anderen.",
+    onboarding1Supporting: 'Wähle dein Ziel. Smoke Lab zeigt dir dann jeden Tag genau einen klaren Schritt.',
+    onboarding1Cta: 'Loslegen',
 
     // Onboarding Screen 2 - Baseline
-    onboardingStepBaseline: 'Ausgangsbasis',
-    onboardingStepIntent: 'Absicht',
-    onboardingStepTriggers: 'Auslöser',
-    onboardingStepMindset: 'Haltung',
-    onboarding2Headline: 'Dein Ausgangspunkt.',
+    onboardingStepBaseline: 'Startpunkt',
+    onboardingStepIntent: 'Ziel',
+    onboardingStepTriggers: 'Situationen',
+    onboardingStepMindset: 'Bereit',
+    onboarding2Headline: 'Wo stehst du jetzt?',
     onboarding2CpdLabel: 'Zigaretten pro Tag',
     onboarding2YearsLabel: 'Raucherjahre',
     onboarding2OptionalSection: 'Kontext',
@@ -336,13 +336,13 @@ export const translations = {
     onboarding2Cta: 'Weiter',
 
     // Onboarding Screen 3 - Goal
-    onboarding3Headline: 'Dein primäres Ziel.',
-    onboarding3Option1Title: 'Muster verstehen',
-    onboarding3Option1Desc: 'Auslöser, Zeiten und emotionale Reize hinter jeder Zigarette erfassen.',
+    onboarding3Headline: 'Wo willst du hin?',
+    onboarding3Option1Title: 'Meine Auslöser verstehen',
+    onboarding3Option1Desc: 'Erkennen, wann und warum du rauchst.',
     onboarding3Option2Title: 'Weniger rauchen',
-    onboarding3Option2Desc: 'Innehalten einbauen und unbewusste Zigaretten reduzieren.',
+    onboarding3Option2Desc: 'Pausen einbauen und Schritt für Schritt reduzieren.',
     onboarding3Option3Title: 'Mit dem Rauchen aufhören',
-    onboarding3Option3Desc: 'Gewohnheitsschleifen systematisch auflösen bis zur Freiheit.',
+    onboarding3Option3Desc: 'Vorbereiten und einem Rauchstopp-Plan folgen.',
     onboarding3Supporting: 'Du kannst dies später jederzeit anpassen.',
 
     // Onboarding Screen 4 - Common Situations
@@ -361,10 +361,10 @@ export const translations = {
     situationOther: 'Andere',
 
     // Onboarding Screen 5 - Observation Mindset
-    onboarding5Headline: 'Zuerst beobachten wir.',
-    onboarding5Copy: 'Verändere an Tag eins noch nichts mit Zwang.\nSmoke Lab lernt zuerst deine natürlichen Muster.',
-    onboarding5Supporting: 'Wertungsfreie Beobachtung nimmt dem Autopiloten die Kraft.',
-    onboarding5Cta: 'Smoke Lab betreten',
+    onboarding5Headline: 'Du bist startklar.',
+    onboarding5Copy: 'Beginne mit ehrlichen Einträgen. Smoke Lab nutzt nur, was du selbst erfasst.',
+    onboarding5Supporting: 'Heute reicht ein echter Moment.',
+    onboarding5Cta: 'Heute anzeigen',
 
     // Today Screen
     dayDiscoverShort: 'Tag 01 · Entdecken',
@@ -387,7 +387,7 @@ export const translations = {
     behaviorMetricBadge: 'Verhaltensmetrik',
 
     // Primary Action Area
-    actionWantToSmoke: 'ICH WILL RAUCHEN',
+    actionWantToSmoke: 'Ich will rauchen',
     actionWantToSmokeSubtitle: 'Nimm den Impuls wahr, bevor du entscheidest.',
     actionSmoked: 'Ich habe geraucht',
     actionSmokedSubtitle: 'Wertungsfrei erfassen',
@@ -444,7 +444,7 @@ export const translations = {
     labPhase3Desc: 'Tage 19–30. Pausen erweitern und alte Gewohnheiten auflösen.',
 
     // Patterns Tab
-    patternsTabTitle: 'Muster-Intelligenz',
+    patternsTabTitle: 'Auslöser & Situationen',
     patternsTabSubtitle: 'Automatisierte Cluster deiner Gewohnheitsschleifen.',
     patternsTabBadge: 'Signale',
     patternsMetric1Val: '—',
@@ -456,7 +456,7 @@ export const translations = {
     trackedCues: 'Aktive Auslöser',
 
     // Progress Tab
-    progressTabTitle: 'Fortschrittssignale',
+    progressTabTitle: 'Deine Auswertung',
     progressTabSubtitle: 'Veränderungen deines Verlangens und deines Control Scores im Zeitverlauf.',
     progressTabBadge: 'Persönliche Analytik',
     progressMetric1Val: '50',
@@ -466,7 +466,7 @@ export const translations = {
     progressFeature1: 'Entwicklung deiner Kontrolle',
 
     // Me Tab
-    meTabTitle: 'Profil & Einstellungen',
+    meTabTitle: 'Mehr',
     meTabBadge: 'Lokal auf Gerät',
     meBaselineSection: 'Ausgangsbasis',
     meCpdLabel: 'Typische Zigaretten pro Tag',

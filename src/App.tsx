@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TabId, UserProfile, JourneyProgress } from './types';
+import { TabId, UserProfile, JourneyProgress, SmokingEvent } from './types';
 import {
   getUserProfile,
   getJourneyProgress,
@@ -20,9 +20,14 @@ import { StorageUnavailableScreen } from './components/common/StorageUnavailable
 import { FutureSchemaScreen } from './components/common/FutureSchemaScreen';
 import { AppErrorBoundary } from './components/common/AppErrorBoundary';
 import { PWAUpdatePrompt } from './components/common/PWAUpdatePrompt';
+import { CravingMode } from './components/craving/CravingMode';
+import { QuickSmokingLogModal } from './components/smoking/QuickSmokingLogModal';
+import { LapseRecoveryModal } from './components/quit/LapseRecoveryModal';
+import { QuitSupportRepository, LapseRecoveryRepository } from './storage/repositories';
+import { PostSmokingFlowEngine } from './services/behavior/PostSmokingFlowEngine';
 
 function AppContent() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabId>('TODAY');
@@ -31,6 +36,10 @@ function AppContent() {
   const [storageUnavailable, setStorageUnavailable] = useState(false);
   const [storageIssue, setStorageIssue] = useState(false);
   const [futureSchemaDetected, setFutureSchemaDetected] = useState(false);
+  const [dataVersion, setDataVersion] = useState(0);
+  const [showCravingMode, setShowCravingMode] = useState(false);
+  const [showQuickSmokingLog, setShowQuickSmokingLog] = useState(false);
+  const [recoverySmokingEvent, setRecoverySmokingEvent] = useState<SmokingEvent | null>(null);
   const appShellRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,6 +99,23 @@ function AppContent() {
     setActiveTab('TODAY');
   };
 
+  const refreshDashboardData = () => {
+    setProgress(getJourneyProgress());
+    setTodaySmokingCount(getTodaySmokingEvents().length);
+    setDataVersion((version) => version + 1);
+  };
+
+  const routeSavedSmokingEvent = (savedEvent?: SmokingEvent) => {
+    if (!savedEvent || !profile) return;
+    const decision = PostSmokingFlowEngine.afterSavedSmokingEvent(
+      profile,
+      savedEvent,
+      QuitSupportRepository.get(),
+      LapseRecoveryRepository.getAll(),
+    );
+    if (decision.action === 'open_recovery') setRecoverySmokingEvent(savedEvent);
+  };
+
   if (isLoading) {
     return (
       <div role="status" aria-live="polite" aria-label={t('loadingLabel')} className="flex min-h-screen w-full items-center justify-center bg-[#F4F3EF] text-[#191B1C]">
@@ -132,17 +158,16 @@ function AppContent() {
         {storageIssue && <StorageIssueBanner />}
 
         {/* Tab Content */}
-        <main id="main-content" tabIndex={-1} className="flex-1 overflow-x-hidden focus:outline-none pb-[calc(env(safe-area-inset-bottom)+0.5rem)]">
+        <main id="main-content" tabIndex={-1} className="flex-1 overflow-x-hidden focus:outline-none pb-[calc(env(safe-area-inset-bottom)+8.5rem)]">
           {activeTab === 'TODAY' && (
             <TodayDashboard
               userProfile={profile}
               progress={progress}
               todaySmokingCount={todaySmokingCount}
-              onDataChanged={() => {
-                setProgress(getJourneyProgress());
-                setTodaySmokingCount(getTodaySmokingEvents().length);
-              }}
+              dataVersion={dataVersion}
+              onDataChanged={refreshDashboardData}
               onOpenLab={() => setActiveTab('LAB')}
+              onOpenCraving={() => setShowCravingMode(true)}
             />
           )}
 
@@ -158,7 +183,55 @@ function AppContent() {
         </main>
 
         {/* Fixed Bottom Navigation */}
+        <div
+          className="fixed sm:absolute left-0 right-0 z-30 mx-auto flex w-full max-w-md items-center gap-2 border-t border-[#D9D9D4] bg-[#F4F3EF]/97 px-[max(1rem,env(safe-area-inset-left))] py-2 backdrop-blur-md"
+          style={{ bottom: 'calc(max(0.8rem, env(safe-area-inset-bottom)) + 3.25rem)' }}
+          aria-label={locale === 'de' ? 'Schnellaktionen' : 'Quick actions'}
+        >
+          <button
+            type="button"
+            id="global-want-to-smoke"
+            onClick={() => setShowCravingMode(true)}
+            className="btn-tactile min-h-12 flex-1 rounded-xl border border-[#B9BCBE] bg-[#E7E7E3] px-4 text-sm font-semibold text-[#191B1C]"
+          >
+            {t('actionWantToSmoke')}
+          </button>
+          <button
+            type="button"
+            id="global-i-smoked"
+            onClick={() => setShowQuickSmokingLog(true)}
+            className="btn-tactile min-h-12 rounded-xl px-3 text-xs font-semibold text-[#4E5253]"
+          >
+            {locale === 'de' ? '+ Geraucht' : '+ Smoked'}
+          </button>
+        </div>
+
         <BottomNavigation currentTab={activeTab} onSelectTab={setActiveTab} />
+
+        <CravingMode
+          isOpen={showCravingMode}
+          onClose={(_score, savedSmokingEvent) => {
+            setShowCravingMode(false);
+            refreshDashboardData();
+            routeSavedSmokingEvent(savedSmokingEvent);
+          }}
+        />
+        <QuickSmokingLogModal
+          isOpen={showQuickSmokingLog}
+          onClose={(savedEvent) => {
+            setShowQuickSmokingLog(false);
+            refreshDashboardData();
+            routeSavedSmokingEvent(savedEvent);
+          }}
+        />
+        <LapseRecoveryModal
+          isOpen={Boolean(recoverySmokingEvent)}
+          smokingEvent={recoverySmokingEvent}
+          onClose={() => {
+            setRecoverySmokingEvent(null);
+            refreshDashboardData();
+          }}
+        />
       </div>
     </div>
   );

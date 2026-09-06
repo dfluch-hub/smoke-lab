@@ -326,12 +326,12 @@ export const TabViews: React.FC<TabViewsProps> = ({
 
           <div className="space-y-1.5 pt-1">
             <h1 className="font-display text-4xl sm:text-[44px] font-normal tracking-[-0.03em] text-[#191B1C] leading-[1.05]">
-              {de ? 'Dein 30-Tage-Labor' : 'Your 30-day Lab'}
+              {de ? 'Dein 30-Tage-Plan' : 'Your 30-day plan'}
             </h1>
             <p className="font-ui text-[13px] text-[#747779] leading-relaxed">
               {de
-                ? 'Kein Streak. Kein Zurücksetzen. Jeder Lab-Tag wartet, bis du bereit bist.'
-                : 'No streak. No reset. Each Lab day waits until you are ready.'}
+                ? 'Ein kleiner Schritt pro Tag. Pausen setzen nichts zurück.'
+                : 'One small step a day. Breaks reset nothing.'}
             </p>
           </div>
 
@@ -342,16 +342,16 @@ export const TabViews: React.FC<TabViewsProps> = ({
           )}
 
           {!journeyState.journeyCompleted && (
-            <section className="rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3] p-4 space-y-2" aria-label={de ? 'Nächster Schritt' : 'Next step'}>
+            <section className="rounded-2xl bg-[#191B1C] p-5 space-y-3 text-[#F2F1ED]" aria-label={de ? 'Nächster Schritt' : 'Next step'}>
               <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#747779]">
                 {de ? 'ALS NÄCHSTES' : 'NEXT'}
               </span>
-              <h2 className="font-ui text-[15px] font-semibold tracking-tight text-[#191B1C]">{currentMission.title}</h2>
-              <p className="font-ui text-xs text-[#747779] leading-relaxed">{currentMission.objective}</p>
+              <h2 className="font-ui text-lg font-semibold tracking-tight">{currentMission.title}</h2>
+              <p className="font-ui text-xs text-[#B9BCBE] leading-relaxed">{currentMission.objective}</p>
               <button
                 type="button"
                 onClick={() => { setSelectedJourneyDay(journeyState.day); setJourneySheetOpen(true); }}
-                className="btn-tactile inline-flex items-center gap-1.5 text-xs font-semibold text-[#191B1C]"
+                className="btn-tactile flex min-h-12 w-full items-center justify-between rounded-xl bg-[#F2F1ED] px-4 text-sm font-semibold text-[#191B1C]"
               >
                 <span>{de ? 'Heutigen Schritt öffnen' : 'Open today’s step'}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -359,6 +359,13 @@ export const TabViews: React.FC<TabViewsProps> = ({
             </section>
           )}
 
+          <details className="group border-t border-[#D9D9D4] pt-2">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between text-xs font-semibold text-[#747779]">
+              <span>{de ? 'Plan und weitere Optionen' : 'Plan and more options'}</span>
+              <span className="group-open:hidden">+</span>
+              <span className="hidden group-open:inline">−</span>
+            </summary>
+            <div className="space-y-7 pt-3">
           <section className="rounded-2xl bg-[#191B1C] text-[#F2F1ED] p-5 space-y-3">
             <div className="flex items-center justify-between gap-3">
               <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#B9BCBE]">
@@ -444,7 +451,7 @@ export const TabViews: React.FC<TabViewsProps> = ({
 
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-ui text-xs font-medium text-[#747779]">{de ? '30 Lab-Tage' : '30 Lab days'}</span>
+              <span className="font-ui text-xs font-medium text-[#747779]">{de ? '30 Tage' : '30 days'}</span>
               <span className="font-ui text-[11px] text-[#747779]">{journeyState.percentComplete}%</span>
             </div>
             <div className="grid grid-cols-6 gap-2" aria-label={de ? '30-Tage-Labor' : '30-day Lab'}>
@@ -498,7 +505,7 @@ export const TabViews: React.FC<TabViewsProps> = ({
           <section className="space-y-3 pt-1" aria-label={locale === 'de' ? 'Experiment-Bibliothek' : 'Experiment library'}>
             <div className="flex items-center justify-between gap-3">
               <div>
-                <span className="font-ui text-xs font-medium text-[#747779] block">{de ? 'Experiment-Bibliothek' : 'Experiment library'}</span>
+                <span className="font-ui text-xs font-medium text-[#747779] block">{de ? 'Persönliche Tests' : 'Personal tests'}</span>
                 <p className="font-ui text-[11px] text-[#747779] mt-0.5">
                   {de ? 'Acht kurze Tests. Smoke Lab sortiert passende zuerst.' : 'Eight short tests. Smoke Lab puts the most relevant first.'}
                 </p>
@@ -550,6 +557,8 @@ export const TabViews: React.FC<TabViewsProps> = ({
                 : 'A Lab day counts through observing, testing, or planning — not through abstinence. Taking a break resets nothing.'}
             </p>
           </section>
+            </div>
+          </details>
         </div>
 
         <JourneyMissionSheet
@@ -1426,6 +1435,25 @@ export const TabViews: React.FC<TabViewsProps> = ({
           {t('meTabTitle')}
         </h1>
       </div>
+
+      <section className="grid grid-cols-2 gap-2" aria-label={locale === 'de' ? 'Weitere Bereiche' : 'More areas'}>
+        <button
+          type="button"
+          onClick={() => onNavigate?.('PATTERNS')}
+          className="min-h-20 rounded-xl border border-[#D9D9D4] bg-[#F8F7F3] p-3 text-left"
+        >
+          <span className="block text-sm font-semibold">{locale === 'de' ? 'Auslöser' : 'Triggers'}</span>
+          <span className="mt-1 block text-[11px] leading-snug text-[#747779]">{locale === 'de' ? 'Erst nach echten Einträgen' : 'Only from real entries'}</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => onNavigate?.('PROGRESS')}
+          className="min-h-20 rounded-xl border border-[#D9D9D4] bg-[#F8F7F3] p-3 text-left"
+        >
+          <span className="block text-sm font-semibold">{locale === 'de' ? 'Auswertung' : 'Review'}</span>
+          <span className="mt-1 block text-[11px] leading-snug text-[#747779]">{locale === 'de' ? 'Zahlen und Entwicklung' : 'Numbers and progress'}</span>
+        </button>
+      </section>
 
       {/* Starting Baseline — Large values directly on page */}
       <section aria-label={locale === 'de' ? 'Ausgangsprofil' : 'Baseline profile'} className="pt-1 space-y-3.5">
