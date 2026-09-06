@@ -275,7 +275,7 @@ export const JourneyMissionSheet: React.FC<JourneyMissionSheetProps> = ({
                 <Check className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-ui text-sm font-medium">{de ? 'Dieser Lab-Tag ist abgeschlossen.' : 'This Lab day is complete.'}</div>
+                <div className="font-ui text-sm font-medium">{de ? 'Diese Tagesaufgabe ist abgeschlossen.' : 'This daily task is complete.'}</div>
                 <div className="font-ui text-xs text-[#747779] mt-0.5">{de ? 'Pausen oder spätere Rückkehr setzen nichts zurück.' : 'Pauses or returning later never reset anything.'}</div>
               </div>
             </div>
@@ -295,8 +295,8 @@ export const JourneyMissionSheet: React.FC<JourneyMissionSheetProps> = ({
               className={`w-full rounded-2xl px-5 py-4 font-ui text-sm font-semibold transition ${canComplete && !submitting ? 'bg-[#191B1C] text-[#F2F1ED] shadow-[0_6px_20px_rgba(25,27,28,0.12)]' : 'bg-[#E7E7E3] text-[#9A9D9D] cursor-not-allowed'}`}
             >
               {isInteractiveManual
-                ? (de ? 'Speichern & Lab-Tag abschließen' : 'Save & complete Lab day')
-                : (de ? 'Lab-Tag abschließen' : 'Complete Lab day')}
+                ? (de ? 'Speichern & Aufgabe abschließen' : 'Save & complete task')
+                : (de ? 'Aufgabe abschließen' : 'Complete task')}
             </button>
           )}
 

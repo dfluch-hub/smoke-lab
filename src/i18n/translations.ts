@@ -5,7 +5,7 @@ export const translations = {
     // Brand & App
     brandName: 'SMOKE LAB',
     tagline: 'Behavior, understood.',
-    corePromise: 'Understand the trigger. Break the pattern.',
+    corePromise: 'Track. Understand. Change with purpose.',
     phaseDiscover: 'Day 01 · Discover',
     privacyNotice: 'On-device storage.',
     offlineNotice: 'Offline — local data remains available.',
@@ -31,8 +31,8 @@ export const translations = {
     navMe: 'More',
 
     // Onboarding Screen 1
-    onboarding1Headline: "Understand your smoking.\nChange one moment at a time.",
-    onboarding1Supporting: 'Choose your goal. Smoke Lab then gives you one clear step each day.',
+    onboarding1Headline: "Track. Understand.\nChange with purpose.",
+    onboarding1Supporting: 'Track real moments. Smoke Lab learns what repeats and shows you what to try next — including immediate help with an urge.',
     onboarding1Cta: 'Get started',
 
     // Onboarding Screen 2 - Baseline
@@ -95,7 +95,7 @@ export const translations = {
     metricBaselineLabel: 'Baseline',
     metricBaselineLearning: 'Learning baseline',
     controlScoreUnit: 'pts',
-    controlScoreInfoTitle: 'Control Score',
+    controlScoreInfoTitle: 'Your response progress',
     controlScoreInfoText: 'Control measures how often you introduce awareness before automatic smoking. Smoking an un-delayed cigarette never erases previous learning.',
     controlScoreDisclaimer: 'Behavioral intelligence metric.',
     controlScoreModalText1: 'Conventional apps treat every cigarette as a reset of will. Smoke Lab treats every urge as data.',
@@ -130,8 +130,8 @@ export const translations = {
     loggingBullet3: 'Contextual environment mapping',
 
     // Today's Experiment
-    experimentLabel: 'Active Experiment',
-    experimentMeta: 'Experiment 01',
+    experimentLabel: 'Active personal test',
+    experimentMeta: 'Personal test 01',
     experimentTitle: 'The Coffee Test',
     experimentDesc: 'Keep the coffee. Delay the cigarette by 10 minutes.',
     experimentSupporting: 'We are testing how strongly coffee and smoking are linked in your routine.',
@@ -149,13 +149,13 @@ export const translations = {
     insightText: 'Smoke Lab is compiling your baseline. After initial logs, this space will reveal your highest-probability triggers.',
 
     // Lab Tab
-    labTabTitle: 'Your 30-day Lab',
+    labTabTitle: 'Your 30-day plan',
     labTabSubtitle: 'Observe. Test. Change.',
     labTabBadge: 'Protocol',
     labPhase1Title: 'Phase 01 · Baseline Mapping',
     labPhase1Desc: 'Days 01–05. Passive logging of triggers, timing, and automaticity.',
     labPhase2Title: 'Phase 02 · Cue Decoupling',
-    labPhase2Desc: 'Days 06–18. Targeted micro-experiments separating cues from reflex.',
+    labPhase2Desc: 'Days 06–18. Short personal tests separate cues from reflex.',
     labPhase3Title: 'Phase 03 · Autopilot Dissolution',
     labPhase3Desc: 'Days 19–30. Delay expansion and automatic pattern replacement.',
 
@@ -173,13 +173,13 @@ export const translations = {
 
     // Progress Tab
     progressTabTitle: 'Your review',
-    progressTabSubtitle: 'Changes in cravings and your Control Score over time.',
+    progressTabSubtitle: 'Changes in your tracked smoking and urges over time.',
     progressTabBadge: 'Personal Analytics',
     progressMetric1Val: '50',
-    progressMetric1Label: 'Control Score',
+    progressMetric1Label: 'Response progress',
     progressMetric3Val: '10m',
     progressMetric3Label: 'Average pause recorded',
-    progressFeature1: 'Control Score trend',
+    progressFeature1: 'Response progress trend',
 
     // Me Tab
     meTabTitle: 'More',
@@ -289,7 +289,7 @@ export const translations = {
     // Brand & App
     brandName: 'SMOKE LAB',
     tagline: 'Verhalten, verstanden.',
-    corePromise: 'Den Auslöser verstehen. Das Muster durchbrechen.',
+    corePromise: 'Tracken. Verstehen. Gezielt verändern.',
     phaseDiscover: 'Tag 01 · Entdecken',
     privacyNotice: 'Lokal auf diesem Gerät.',
     offlineNotice: 'Offline — lokale Daten bleiben verfügbar.',
@@ -315,8 +315,8 @@ export const translations = {
     navMe: 'Mehr',
 
     // Onboarding Screen 1
-    onboarding1Headline: "Verstehe dein Rauchen.\nVerändere einen Moment nach dem anderen.",
-    onboarding1Supporting: 'Wähle dein Ziel. Smoke Lab zeigt dir dann jeden Tag genau einen klaren Schritt.',
+    onboarding1Headline: "Tracken. Verstehen.\nGezielt verändern.",
+    onboarding1Supporting: 'Erfasse echte Momente. Smoke Lab erkennt Wiederholungen und zeigt dir den nächsten passenden Schritt – auch bei akutem Rauchverlangen.',
     onboarding1Cta: 'Loslegen',
 
     // Onboarding Screen 2 - Baseline
@@ -379,7 +379,7 @@ export const translations = {
     metricBaselineLabel: 'Basis',
     metricBaselineLearning: 'Erfasse Basis',
     controlScoreUnit: 'Pkt.',
-    controlScoreInfoTitle: 'Control Score',
+    controlScoreInfoTitle: 'Deine Reaktionsentwicklung',
     controlScoreInfoText: 'Control misst, wie oft du vor dem automatischen Griff zur Zigarette ein Innehalten einfügst. Eine gerauchte Zigarette setzt Gelerntes niemals zurück.',
     controlScoreDisclaimer: 'Verhaltensmetrik.',
     controlScoreModalText1: 'Klassische Apps werten jeden Griff zur Zigarette als Willensschwäche. Smoke Lab begreift jeden Impuls als wertvollen Datenpunkt.',
@@ -414,8 +414,8 @@ export const translations = {
     loggingBullet3: 'Kontextuelle Umgebung erfassen',
 
     // Today's Experiment
-    experimentLabel: 'Aktives Experiment',
-    experimentMeta: 'Experiment 01',
+    experimentLabel: 'Aktiver persönlicher Test',
+    experimentMeta: 'Persönlicher Test 01',
     experimentTitle: 'Der Kaffee-Test',
     experimentDesc: 'Behalte den Kaffee. Verschiebe die Zigarette um 10 Minuten.',
     experimentSupporting: 'Wir testen, wie stark Kaffee und Zigarette in deiner Routine miteinander gekoppelt sind.',
@@ -433,13 +433,13 @@ export const translations = {
     insightText: 'Smoke Lab erfasst deine Basisdaten. Nach ersten Einträgen zeigt dieser Bereich deine häufigsten Auslöser.',
 
     // Lab Tab
-    labTabTitle: 'Dein 30-Tage-Labor',
+    labTabTitle: 'Dein 30-Tage-Plan',
     labTabSubtitle: 'Beobachten. Testen. Verändern.',
     labTabBadge: 'Protokoll',
     labPhase1Title: 'Phase 01 · Basis-Erfassung',
     labPhase1Desc: 'Tage 01–05. Passives Erfassen von Auslösern, Timing und Automatismen.',
     labPhase2Title: 'Phase 02 · Reiz-Entkopplung',
-    labPhase2Desc: 'Tage 06–18. Gezielte Mikro-Experimente trennen Reize vom Reflex.',
+    labPhase2Desc: 'Tage 06–18. Kurze persönliche Tests trennen Reize vom Reflex.',
     labPhase3Title: 'Phase 03 · Autopilot-Auflösung',
     labPhase3Desc: 'Tage 19–30. Pausen erweitern und alte Gewohnheiten auflösen.',
 
@@ -457,10 +457,10 @@ export const translations = {
 
     // Progress Tab
     progressTabTitle: 'Deine Auswertung',
-    progressTabSubtitle: 'Veränderungen deines Verlangens und deines Control Scores im Zeitverlauf.',
+    progressTabSubtitle: 'Veränderungen deiner erfassten Zigaretten und Drangmomente im Zeitverlauf.',
     progressTabBadge: 'Persönliche Analytik',
     progressMetric1Val: '50',
-    progressMetric1Label: 'Control Score',
+    progressMetric1Label: 'Reaktionsentwicklung',
     progressMetric3Val: '10m',
     progressMetric3Label: 'Durchschnittliche Pause',
     progressFeature1: 'Entwicklung deiner Kontrolle',

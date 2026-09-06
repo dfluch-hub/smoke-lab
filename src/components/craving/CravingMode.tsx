@@ -850,7 +850,7 @@ export const CravingMode: React.FC<CravingModeProps> = ({ isOpen, onClose }) => 
                 <div className="inline-flex items-center gap-1.5 text-xs text-[#B9BCBE] pt-1">
                   <Sparkles className="w-3.5 h-3.5 text-[#17372E]" />
                   <span>
-                    {locale === 'de' ? 'Persönlicher Hypothesentest' : 'Personal hypothesis test'} · {Math.min(matchedExperiment.targetAttempts, matchedExperiment.attemptCravingIds.length + 1)}/{matchedExperiment.targetAttempts}
+                    {locale === 'de' ? 'Persönlicher Test' : 'Personal test'} · {Math.min(matchedExperiment.targetAttempts, matchedExperiment.attemptCravingIds.length + 1)}/{matchedExperiment.targetAttempts}
                   </span>
                 </div>
               )}
@@ -858,7 +858,7 @@ export const CravingMode: React.FC<CravingModeProps> = ({ isOpen, onClose }) => 
               {activeIntervention.isJourneyExperiment && (
                 <div className="inline-flex items-center gap-1.5 text-xs text-[#B9BCBE] pt-1">
                   <Sparkles className="w-3.5 h-3.5 text-[#17372E]" />
-                  <span>{locale === 'de' ? 'Heutiges Lab-Experiment' : "Today's Lab experiment"}</span>
+                  <span>{locale === 'de' ? 'Heutige Übung' : "Today's practice"}</span>
                 </div>
               )}
 
@@ -1147,7 +1147,7 @@ export const CravingMode: React.FC<CravingModeProps> = ({ isOpen, onClose }) => 
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#747779]">
                   {matchedExperiment.status === 'completed'
                     ? (locale === 'de' ? 'Auswertung des Tests' : 'Test result')
-                    : (locale === 'de' ? `Hypothesentest · ${matchedExperiment.attemptCravingIds.length}/${matchedExperiment.targetAttempts}` : `Hypothesis test · ${matchedExperiment.attemptCravingIds.length}/${matchedExperiment.targetAttempts}`)}
+                    : (locale === 'de' ? `Persönlicher Test · ${matchedExperiment.attemptCravingIds.length}/${matchedExperiment.targetAttempts}` : `Personal test · ${matchedExperiment.attemptCravingIds.length}/${matchedExperiment.targetAttempts}`)}
                 </div>
                 <p className="font-ui text-xs text-[#B9BCBE] leading-relaxed">{experimentFeedback}</p>
               </div>

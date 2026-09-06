@@ -385,13 +385,13 @@ export const TabViews: React.FC<TabViewsProps> = ({
           </section>
 
           {journeyState.journeyCompleted ? (
-            <section className="rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3] p-5 space-y-2" aria-label={de ? '30-Tage-Labor abgeschlossen' : '30-day Lab completed'}>
+            <section className="rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3] p-5 space-y-2" aria-label={de ? '30-Tage-Plan abgeschlossen' : '30-day plan completed'}>
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#17372E] stroke-[2]" />
                 <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#747779]">30 / 30</span>
               </div>
               <h3 className="font-ui text-[17px] font-semibold tracking-tight text-[#191B1C]">
-                {de ? 'Dein 30-Tage-Labor ist abgeschlossen.' : 'Your 30-day Lab is complete.'}
+                {de ? 'Dein 30-Tage-Plan ist abgeschlossen.' : 'Your 30-day plan is complete.'}
               </h3>
               <p className="font-ui text-xs sm:text-[13px] text-[#747779] leading-relaxed">
                 {de
@@ -454,7 +454,7 @@ export const TabViews: React.FC<TabViewsProps> = ({
               <span className="font-ui text-xs font-medium text-[#747779]">{de ? '30 Tage' : '30 days'}</span>
               <span className="font-ui text-[11px] text-[#747779]">{journeyState.percentComplete}%</span>
             </div>
-            <div className="grid grid-cols-6 gap-2" aria-label={de ? '30-Tage-Labor' : '30-day Lab'}>
+            <div className="grid grid-cols-6 gap-2" aria-label={de ? '30-Tage-Plan' : '30-day plan'}>
               {Array.from({ length: 30 }, (_, index) => index + 1).map((day) => {
                 const completed = journeyState.completedDays.includes(day);
                 const current = day === journeyState.day;
@@ -502,7 +502,7 @@ export const TabViews: React.FC<TabViewsProps> = ({
             })}
           </section>
 
-          <section className="space-y-3 pt-1" aria-label={locale === 'de' ? 'Experiment-Bibliothek' : 'Experiment library'}>
+          <section className="space-y-3 pt-1" aria-label={locale === 'de' ? 'Sammlung persönlicher Tests' : 'Personal test library'}>
             <div className="flex items-center justify-between gap-3">
               <div>
                 <span className="font-ui text-xs font-medium text-[#747779] block">{de ? 'Persönliche Tests' : 'Personal tests'}</span>
@@ -553,8 +553,8 @@ export const TabViews: React.FC<TabViewsProps> = ({
             <LockKeyhole className="w-4 h-4 text-[#747779] mt-0.5 shrink-0 stroke-[1.5]" />
             <p className="font-ui text-[11.5px] text-[#747779] leading-relaxed">
               {de
-                ? 'Ein Lab-Tag zählt durch Beobachten, Testen oder Planen – nicht durch Abstinenz. Eine Pause setzt nichts zurück.'
-                : 'A Lab day counts through observing, testing, or planning — not through abstinence. Taking a break resets nothing.'}
+                ? 'Ein Plantag zählt durch Beobachten, Üben oder Planen – nicht durch Abstinenz. Eine Pause setzt nichts zurück.'
+                : 'A plan day counts through observing, practicing, or planning — not through abstinence. Taking a break resets nothing.'}
             </p>
           </section>
             </div>
@@ -577,8 +577,8 @@ export const TabViews: React.FC<TabViewsProps> = ({
         <ModalSheet
           isOpen={experimentLibraryOpen}
           onClose={() => setExperimentLibraryOpen(false)}
-          title={de ? 'Experiment-Bibliothek' : 'Experiment library'}
-          badge={de ? 'LAB TESTS' : 'LAB TESTS'}
+          title={de ? 'Persönliche Tests' : 'Personal tests'}
+          badge={de ? 'ÜBUNGEN' : 'PRACTICES'}
         >
           <div className="space-y-4">
             <p className="font-ui text-xs text-[#747779] leading-relaxed">
@@ -1500,8 +1500,8 @@ export const TabViews: React.FC<TabViewsProps> = ({
           </span>
           <p className="font-ui text-[11px] text-[#747779] leading-relaxed">
             {locale === 'de'
-              ? 'Du kannst zwischen Verstehen, Reduzieren und Aufhören wechseln. Deine bisherigen Logs, Tests und dein Control Model bleiben erhalten.'
-              : 'You can switch between understanding, reducing, and quitting. Your existing logs, tests, and Control Model remain intact.'}
+              ? 'Du kannst zwischen Verstehen, Reduzieren und Aufhören wechseln. Deine bisherigen Einträge, Tests und Erkenntnisse bleiben erhalten.'
+              : 'You can switch between understanding, reducing, and quitting. Your existing entries, tests, and insights remain intact.'}
           </p>
         </div>
         <div className="grid grid-cols-3 gap-1.5 rounded-xl bg-[#E7E7E3] p-1.5">

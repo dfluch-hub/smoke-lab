@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, CalendarDays, CheckCircle2, Eye, Target } from 'lucide-react';
 import { CravingEvent, JourneyProgress, PersonalExperiment, SmokingEvent, UserProfile } from '../../types';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { ModalSheet } from '../common/ModalSheet';
@@ -116,65 +116,63 @@ export const TodayDashboard: React.FC<TodayDashboardProps> = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-5 pt-3 pb-8 text-[#191B1C]">
-      <header className="flex items-center justify-between border-b border-[#D9D9D4] pb-3 pt-1">
-        <span className="text-[11px] font-semibold tracking-[0.22em] uppercase">{t('brandName')}</span>
-        <span className="text-[11px] text-[#747779]">{de ? `Tag ${day} von 30` : `Day ${day} of 30`}</span>
+    <div className="v19-screen">
+      <header className="v19-header">
+        <div>
+          <p className="v19-eyebrow">{t('brandName')}</p>
+          <h1>{de ? 'Heute' : 'Today'}</h1>
+        </div>
+        <div className="rounded-full bg-[#FFFDF8] px-3 py-2 text-xs font-bold text-[#5F5851] shadow-sm">{de ? `Tag ${day}` : `Day ${day}`}</div>
       </header>
 
-      <div className="pt-6 space-y-5">
-        <div className="space-y-1">
-          <p className="text-xs font-semibold text-[#747779]">{de ? 'DEIN HEUTE' : 'YOUR TODAY'}</p>
-          <h1 className="font-display text-4xl tracking-[-0.03em] leading-none">
-            {de ? 'Ein Schritt reicht.' : 'One step is enough.'}
-          </h1>
+      <section className="grid grid-cols-2 gap-3" aria-label={de ? 'Dein Stand' : 'Your status'}>
+        <div className="v19-card flex items-start gap-3 p-3">
+          <div className="v19-small-icon bg-[#E1EFE7] text-[#24584A]"><CalendarDays /></div>
+          <div><span className="v19-caption">{de ? 'Phase' : 'Phase'}</span><strong className="mt-0.5 block text-sm">{phase.title}</strong></div>
         </div>
+        <div className="v19-card flex items-start gap-3 p-3">
+          <div className="v19-small-icon bg-[#FFF0E8] text-[#B85C3F]"><Target /></div>
+          <div><span className="v19-caption">{de ? 'Ziel' : 'Goal'}</span><strong className="mt-0.5 block text-sm">{goalLabel}</strong></div>
+        </div>
+      </section>
 
-        <section className="overflow-hidden rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3]" aria-label={de ? 'Deine Orientierung für heute' : 'Your orientation for today'}>
-          <div className="grid grid-cols-[5.5rem_1fr] gap-3 border-b border-[#D9D9D4] px-4 py-3">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#747779]">{de ? 'Du bist' : 'You are'}</span>
-            <span className="text-sm font-semibold">{de ? `Tag ${day} · ${phase.title}` : `Day ${day} · ${phase.title}`}</span>
+      <section className="v19-card v19-card-accent space-y-4" aria-label={de ? 'Deine Aufgabe heute' : 'Your task today'}>
+        <div className="flex items-start gap-3">
+          <div className="v19-small-icon bg-white/75 text-[#B85C3F]"><CheckCircle2 /></div>
+          <div>
+            <p className="v19-eyebrow text-[#7B4B36]">{de ? 'HEUTE WICHTIG' : 'IMPORTANT TODAY'}</p>
+            <h2 className="mt-1 text-xl font-bold leading-snug">{taskTitle}</h2>
           </div>
-          <div className="grid grid-cols-[5.5rem_1fr] gap-3 border-b border-[#D9D9D4] px-4 py-3">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#747779]">{de ? 'Dein Ziel' : 'Your goal'}</span>
-            <span className="text-sm font-semibold">{goalLabel}</span>
-          </div>
-          <div className="px-4 py-4 space-y-1.5">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#747779]">{de ? 'Heute' : 'Today'}</span>
-            <h2 className="text-lg font-semibold leading-snug">{taskTitle}</h2>
-            <p className="text-xs leading-relaxed text-[#747779]">{taskBody}</p>
-          </div>
-        </section>
-
-        <section className="rounded-2xl bg-[#E7E7E3] p-4 space-y-3" aria-label={de ? 'Nächster Schritt' : 'Next step'}>
-          <div className="space-y-1">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#747779]">{de ? 'Jetzt' : 'Now'}</span>
-            <p className="text-sm font-semibold">{nextStepLabel}</p>
-          </div>
+        </div>
+        <p className="v19-body">{taskBody}</p>
+        <div className="rounded-xl bg-white/65 px-3 py-2.5">
+          <span className="v19-caption">{de ? 'Dein nächster Schritt' : 'Your next step'}</span>
+          <p className="mt-0.5 text-sm font-bold">{nextStepLabel}</p>
+        </div>
           <button
             type="button"
             id="btn-open-todays-step"
             onClick={openNextStep}
-            className="btn-tactile flex min-h-12 w-full items-center justify-between rounded-xl bg-[#191B1C] px-4 text-sm font-semibold text-[#F2F1ED]"
+            className="v19-primary-button"
           >
             <span>{nextStepLabel}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
-        </section>
+      </section>
 
-        <details className="group border-t border-[#D9D9D4] pt-3">
-          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between text-xs font-semibold text-[#747779]">
-            <span>{de ? 'Heutiges Protokoll' : "Today's log"}</span>
-            <span className="flex items-center gap-2">
-              {todaySmokingCount} {de ? 'Zigaretten' : 'cigarettes'}
-              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" aria-hidden="true" />
-            </span>
-          </summary>
-          <p className="pb-2 text-xs leading-relaxed text-[#747779]">
-            {de ? 'Nur deine echten Einträge werden gezählt. Auswertungen findest du unter Mehr.' : 'Only your real entries are counted. Find analysis under More.'}
-          </p>
-        </details>
-      </div>
+      <section className="v19-card space-y-3" aria-label={de ? 'So funktioniert Smoke Lab' : 'How Smoke Lab works'}>
+        <div className="flex items-center gap-2"><Eye className="h-5 w-5 text-[#24584A]" /><h2 className="text-sm font-bold">{de ? 'So hilft dir dein Tracking' : 'How tracking helps you'}</h2></div>
+        <div className="flex items-center justify-between gap-2 text-center text-[11px] font-bold text-[#5F5851]">
+          <span className="rounded-lg bg-[#F1EADF] px-2.5 py-2">{de ? 'Tracken' : 'Track'}</span><ArrowRight className="h-3.5 w-3.5 text-[#B7A99A]" />
+          <span className="rounded-lg bg-[#F1EADF] px-2.5 py-2">{de ? 'Verstehen' : 'Understand'}</span><ArrowRight className="h-3.5 w-3.5 text-[#B7A99A]" />
+          <span className="rounded-lg bg-[#E1EFE7] px-2.5 py-2 text-[#24584A]">{de ? 'Verändern' : 'Change'}</span>
+        </div>
+        <p className="v19-caption">
+          {de
+            ? `${todaySmokingCount} ${todaySmokingCount === 1 ? 'echte Zigarette' : 'echte Zigaretten'} heute erfasst.`
+            : `${todaySmokingCount} real ${todaySmokingCount === 1 ? 'cigarette' : 'cigarettes'} tracked today.`}
+        </p>
+      </section>
 
       <ModalSheet
         isOpen={showPersonalTest}
