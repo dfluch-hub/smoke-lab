@@ -49,6 +49,7 @@ jobs:
 
           rm -rf _smokelab_unpack
           rm -f "$ZIP_FILE"
+          rm -f .github/workflows/release-checks.yml
 
       - name: Commit unpacked SmokeLab files
         shell: bash
