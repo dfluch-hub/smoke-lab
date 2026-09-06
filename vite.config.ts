@@ -4,7 +4,10 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const base = '/smoke-lab/';
+
 export default defineConfig(() => ({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -21,7 +24,7 @@ export default defineConfig(() => ({
         'pwa-maskable-512x512.png',
       ],
       manifest: {
-        id: '/',
+        id: base,
         name: 'SMOKE LAB',
         short_name: 'SmokeLab',
         description: 'Understand the trigger. Break the pattern. Mobile-first behavioral PWA to interrupt automatic smoking moments.',
@@ -30,25 +33,25 @@ export default defineConfig(() => ({
         display: 'standalone',
         display_override: ['standalone', 'minimal-ui'],
         orientation: 'portrait',
-        start_url: '/',
-        scope: '/',
+        start_url: base,
+        scope: base,
         categories: ['lifestyle'],
         prefer_related_applications: false,
         icons: [
           {
-            src: '/pwa-192x192.png',
+            src: `${base}pwa-192x192.png`,
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: '/pwa-512x512.png',
+            src: `${base}pwa-512x512.png`,
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: '/pwa-maskable-512x512.png',
+            src: `${base}pwa-maskable-512x512.png`,
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',
@@ -60,7 +63,7 @@ export default defineConfig(() => ({
         cleanupOutdatedCaches: true,
         clientsClaim: false,
         skipWaiting: false,
-        navigateFallback: '/index.html',
+        navigateFallback: `${base}index.html`,
       },
       // Dev service workers are intentionally disabled so stale dev caches cannot
       // masquerade as app bugs. Offline behavior is validated on production builds.
