@@ -26,7 +26,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
     <nav
       id="bottom-navigation"
       aria-label={t('mainNavigation')}
-      className="fixed sm:absolute bottom-0 left-0 right-0 z-40 mx-auto w-full max-w-md bg-[#F4F3EF]/95 backdrop-blur-md border-t border-[#D9D9D4]/80 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] pt-1.5 pb-[max(0.45rem,env(safe-area-inset-bottom))]"
+      className="fixed sm:absolute bottom-0 left-0 right-0 z-40 mx-auto w-full max-w-md bg-[#F4F3EF]/95 backdrop-blur-md border-t border-[#D9D9D4]/80 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] pt-2 pb-[max(0.8rem,env(safe-area-inset-bottom))]"
     >
       <div className="flex items-center justify-around">
         {tabs.map((tab) => {

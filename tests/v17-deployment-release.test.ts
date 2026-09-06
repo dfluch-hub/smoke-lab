@@ -8,7 +8,7 @@ const assert = (condition: unknown, message: string) => {
 };
 
 const pkg = JSON.parse(read('package.json'));
-assert(pkg.version === '0.17.0', 'package version must be 0.17.0');
+assert(Number(pkg.version.split('.')[1]) >= 17, 'package version must remain v17 or newer');
 assert(pkg.scripts?.['check:release']?.includes('npm run build'), 'release check must include production build');
 
 const netlify = read('netlify.toml');

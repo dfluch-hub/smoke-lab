@@ -215,53 +215,33 @@ export const TodayDashboard: React.FC<TodayDashboardProps> = ({
         </p>
       </div>
 
-      {/* 3. Striking Data Composition — Direct on canvas, no heavy cards */}
-      <section aria-label={locale === 'de' ? 'Tägliche Signale' : 'Daily signals'} className="pt-2">
-        <div className="grid grid-cols-2 items-start gap-8">
-          {/* Left: Cigarettes Today */}
-          <div className="space-y-1">
-            <div className="text-6xl sm:text-[70px] font-light tracking-tight text-[#191B1C] tabular-nums leading-none">
-              {todaySmokingCount}
-            </div>
-            <div className="font-ui text-xs text-[#747779] font-normal tracking-tight pt-1">
-              {t('metricCigarettesToday')}
-            </div>
-          </div>
-
-          {/* Right: CONTROL Score & Baseline */}
-          <div className="space-y-1 text-left sm:pl-2">
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-[#747779]">
-                {t('metricControlScore')}
-              </span>
-              <button
-                type="button"
-                onClick={() => setShowControlInfo(true)}
-                className="h-11 w-11 -m-3 inline-flex items-center justify-center rounded-lg text-[#747779] hover:text-[#191B1C] hover:bg-[#E7E7E3] transition"
-                aria-label={locale === 'de' ? 'Über den Control Score' : 'About Control Score'}
-              >
-                <Info aria-hidden="true" className="w-3.5 h-3.5 stroke-[1.6]" />
-              </button>
-            </div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-4xl sm:text-[46px] font-light text-[#191B1C] tabular-nums leading-none">
-                {hasBehaviorData ? controlScore : '—'}
-              </span>
-              {hasBehaviorData && (
-                <span className="text-xs font-mono text-[#747779]">
-                  {t('controlScoreUnit')}
-                </span>
-              )}
-            </div>
-            <div className="font-ui text-xs text-[#747779] tracking-tight pt-1">
-              {t('metricBaselineLabel')} ~{baselineCpd}{locale === 'de' ? ' / Tag' : ' / day'}
-            </div>
-          </div>
-        </div>
+      {/* 3. Guided orientation — v18: tell the user what to do before showing analytics */}
+      <section aria-label={locale === 'de' ? 'Nächster Schritt' : 'Next step'} className="rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3] p-4 space-y-1.5">
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#747779]">
+          {locale === 'de' ? 'JETZT' : 'NOW'}
+        </span>
+        <h2 className="font-ui text-[15px] font-semibold tracking-tight text-[#191B1C]">
+          {hasBehaviorData
+            ? (locale === 'de' ? 'Nur den nächsten echten Moment erfassen.' : 'Capture only the next real moment.')
+            : (locale === 'de' ? 'Du musst heute nichts perfekt machen.' : 'You do not need to do anything perfectly today.')}
+        </h2>
+        <p className="font-ui text-xs sm:text-[13px] text-[#747779] leading-relaxed">
+          {locale === 'de'
+            ? 'Wenn du gerade rauchen willst, starte den Drang-Flow. Wenn du schon geraucht hast, protokolliere es. Smoke Lab führt dich danach weiter.'
+            : 'If you want to smoke right now, start the urge flow. If you already smoked, log it. Smoke Lab will guide you from there.'}
+        </p>
       </section>
 
       {/* 4. Dominant Dark Graphite Action & Understated Secondary */}
       <section aria-label={locale === 'de' ? 'Drang und Protokoll-Aktionen' : 'Urge and log actions'} className="space-y-2.5 pt-1">
+        <div className="flex items-center justify-between px-0.5">
+          <span className="font-ui text-xs font-medium text-[#747779]">
+            {locale === 'de' ? 'Was ist gerade der Fall?' : 'What is happening right now?'}
+          </span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#747779]">
+            {locale === 'de' ? '1 Schritt' : '1 step'}
+          </span>
+        </div>
         {/* DOMINANT DARK GRAPHITE ACTION: I WANT TO SMOKE */}
         <button
           type="button"
@@ -305,6 +285,51 @@ export const TodayDashboard: React.FC<TodayDashboardProps> = ({
               +1
             </span>
           </button>
+        </div>
+      </section>
+
+      {/* 3. Striking Data Composition — Direct on canvas, no heavy cards */}
+      <section aria-label={locale === 'de' ? 'Tägliche Signale' : 'Daily signals'} className="pt-2">
+        <div className="grid grid-cols-2 items-start gap-8">
+          {/* Left: Cigarettes Today */}
+          <div className="space-y-1">
+            <div className="text-6xl sm:text-[70px] font-light tracking-tight text-[#191B1C] tabular-nums leading-none">
+              {todaySmokingCount}
+            </div>
+            <div className="font-ui text-xs text-[#747779] font-normal tracking-tight pt-1">
+              {t('metricCigarettesToday')}
+            </div>
+          </div>
+
+          {/* Right: CONTROL Score & Baseline */}
+          <div className="space-y-1 text-left sm:pl-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-[#747779]">
+                {t('metricControlScore')}
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowControlInfo(true)}
+                className="h-11 w-11 -m-3 inline-flex items-center justify-center rounded-lg text-[#747779] hover:text-[#191B1C] hover:bg-[#E7E7E3] transition"
+                aria-label={locale === 'de' ? 'Über den Control Score' : 'About Control Score'}
+              >
+                <Info aria-hidden="true" className="w-3.5 h-3.5 stroke-[1.6]" />
+              </button>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-4xl sm:text-[46px] font-light text-[#191B1C] tabular-nums leading-none">
+                {hasBehaviorData ? controlScore : '—'}
+              </span>
+              {hasBehaviorData && (
+                <span className="text-xs font-mono text-[#747779]">
+                  {t('controlScoreUnit')}
+                </span>
+              )}
+            </div>
+            <div className="font-ui text-xs text-[#747779] tracking-tight pt-1">
+              {t('metricBaselineLabel')} ~{baselineCpd}{locale === 'de' ? ' / Tag' : ' / day'}
+            </div>
+          </div>
         </div>
       </section>
 

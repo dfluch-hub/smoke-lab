@@ -132,7 +132,7 @@ function AppContent() {
         {storageIssue && <StorageIssueBanner />}
 
         {/* Tab Content */}
-        <main id="main-content" tabIndex={-1} className="flex-1 overflow-x-hidden focus:outline-none">
+        <main id="main-content" tabIndex={-1} className="flex-1 overflow-x-hidden focus:outline-none pb-[calc(env(safe-area-inset-bottom)+0.5rem)]">
           {activeTab === 'TODAY' && (
             <TodayDashboard
               userProfile={profile}

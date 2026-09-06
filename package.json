@@ -1,7 +1,7 @@
 {
   "name": "smoke-lab-pwa",
   "private": true,
-  "version": "0.17.0",
+  "version": "0.18.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test:engine": "tsx tests/engine.test.ts && tsx tests/journey.test.ts && tsx tests/adaptation.test.ts && tsx tests/hypothesis.test.ts && tsx tests/sequencing.test.ts && tsx tests/control-model.test.ts && tsx tests/goal-support.test.ts && tsx tests/quit-recovery.test.ts && tsx tests/v9-integration.test.ts && tsx tests/v10-integration.test.ts && tsx tests/v11-release-hardening.test.ts && tsx tests/v12-product-readiness.test.ts && tsx tests/v13-resilience.test.ts && tsx tests/v14-lifecycle-scenarios.test.ts && tsx tests/v15-end-to-end-hardening.test.ts && tsx tests/v16-pwa-release.test.ts && tsx tests/v17-deployment-release.test.ts",
+    "test:engine": "tsx tests/engine.test.ts && tsx tests/journey.test.ts && tsx tests/adaptation.test.ts && tsx tests/hypothesis.test.ts && tsx tests/sequencing.test.ts && tsx tests/control-model.test.ts && tsx tests/goal-support.test.ts && tsx tests/quit-recovery.test.ts && tsx tests/v9-integration.test.ts && tsx tests/v10-integration.test.ts && tsx tests/v11-release-hardening.test.ts && tsx tests/v12-product-readiness.test.ts && tsx tests/v13-resilience.test.ts && tsx tests/v14-lifecycle-scenarios.test.ts && tsx tests/v15-end-to-end-hardening.test.ts && tsx tests/v16-pwa-release.test.ts && tsx tests/v17-deployment-release.test.ts && tsx tests/v18-guided-ux.test.ts",
     "check:release": "npm run lint && npm run test:engine && npm run build"
   },
   "dependencies": {

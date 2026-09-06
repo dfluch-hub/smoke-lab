@@ -341,6 +341,24 @@ export const TabViews: React.FC<TabViewsProps> = ({
             </p>
           )}
 
+          {!journeyState.journeyCompleted && (
+            <section className="rounded-2xl border border-[#D9D9D4] bg-[#F8F7F3] p-4 space-y-2" aria-label={de ? 'Nächster Schritt' : 'Next step'}>
+              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#747779]">
+                {de ? 'ALS NÄCHSTES' : 'NEXT'}
+              </span>
+              <h2 className="font-ui text-[15px] font-semibold tracking-tight text-[#191B1C]">{currentMission.title}</h2>
+              <p className="font-ui text-xs text-[#747779] leading-relaxed">{currentMission.objective}</p>
+              <button
+                type="button"
+                onClick={() => { setSelectedJourneyDay(journeyState.day); setJourneySheetOpen(true); }}
+                className="btn-tactile inline-flex items-center gap-1.5 text-xs font-semibold text-[#191B1C]"
+              >
+                <span>{de ? 'Heutigen Schritt öffnen' : 'Open today’s step'}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            </section>
+          )}
+
           <section className="rounded-2xl bg-[#191B1C] text-[#F2F1ED] p-5 space-y-3">
             <div className="flex items-center justify-between gap-3">
               <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#B9BCBE]">
