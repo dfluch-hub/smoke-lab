@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@layer base {
+  :root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+
+    /* Refined Luxury Material Palette */
+    --color-canvas: #F4F3EF;
+    --color-graphite-primary: #191B1C;
+    --color-graphite-secondary: #232627;
+    --color-text-on-dark: #F2F1ED;
+    --color-mineral: #E7E7E3;
+    --color-silver: #B9BCBE;
+    --color-text-secondary: #747779;
+    --color-hairline: #D9D9D4;
+    --color-accent-forest: #17372E;
+
+    /* FUTURE CRAVING MODE DESIGN TOKENS (Preserved for future focused intervention) */
+    --craving-mode-bg: #191B1C;
+    --craving-mode-surface: #232627;
+    --craving-mode-text-primary: #F2F1ED;
+    --craving-mode-text-secondary: #747779;
+    --craving-mode-accent: #17372E;
+    --craving-mode-border: #2E3234;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+    letter-spacing: -0.012em;
+  }
+
+  html, body, #root {
+    min-height: 100%;
+    min-height: 100dvh;
+  }
+
+  body {
+    margin: 0;
+    background-color: #F4F3EF;
+    color: #191B1C;
+    overscroll-behavior-y: none;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+::selection {
+  background-color: #191B1C;
+  color: #F2F1ED;
+}
+
+/* Luxury Editorial Display font — Instrument Serif */
+.font-display {
+  font-family: "Instrument Serif", Newsreader, Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Functional UI font — Inter with crisp geometric numbers */
+.font-ui {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  letter-spacing: -0.012em;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(25, 27, 28, 0.12);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(25, 27, 28, 0.22);
+}
+
+/* Tactile button active feedback */
+.btn-tactile {
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.12s ease;
+}
+.btn-tactile:active {
+  transform: scale(0.985);
+  opacity: 0.93;
+}
+
+/* Keyboard access without changing the quiet visual language for pointer users. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #17372E;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-180%);
+  border-radius: 0.75rem;
+  background: #191B1C;
+  color: #F2F1ED;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

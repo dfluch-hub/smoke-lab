@@ -1,0 +1,6 @@
+{
+  "name": "SMOKE LAB",
+  "description": "Mobile-first behavioral PWA to understand smoking patterns and interrupt automatic loops.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

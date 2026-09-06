@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#162F24" />
+  <!-- Minimalist scientific loop motif: Continuous loop with deliberate awareness interruption -->
+  <circle cx="256" cy="256" r="44" fill="#D6E3D8" />
+  <path d="M 256 126 A 130 130 0 1 0 376 210" fill="none" stroke="#D6E3D8" stroke-width="32" stroke-linecap="round" />
+  <circle cx="376" cy="210" r="18" fill="#A3C2AC" />
+  <path d="M 330 145 L 365 145" fill="none" stroke="#A3C2AC" stroke-width="12" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,10 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# v17 deployment files are intentionally tracked
