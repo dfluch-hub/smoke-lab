@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, Gauge, MapPin, MousePointerClick, Smile } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Clock, Gauge, MapPin, MousePointerClick, Smile } from 'lucide-react';
 import { DecisionType, EnjoymentRating, SmokingEvent } from '../../types';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { CravingEventRepository, JourneyRepository, SmokingEventRepository } from '../../storage/repositories';
@@ -12,6 +12,7 @@ interface QuickSmokingLogModalProps {
 }
 
 type QuestionId = 'trigger' | 'intensity' | 'place' | 'decision' | 'enjoyment';
+type TimeMode = 'now' | 'minus15' | 'minus30' | 'custom';
 
 const TRIGGERS = {
   de: ['Kaffee', 'Stress', 'Nach dem Essen', 'Alkohol', 'Langeweile', 'Sozial', 'Autofahren', 'Gewohnheit', 'Arbeitspause', 'Morgenroutine', 'Abendroutine', 'Sonstiges'],
@@ -22,6 +23,8 @@ const PLACES = {
   de: ['Zuhause', 'Arbeit', 'Auto', 'Draußen', 'Restaurant / Bar', 'Bei anderen', 'Soziales Treffen', 'Sonstiges'],
   en: ['Home', 'Work', 'Car', 'Outside', 'Restaurant / Bar', "At someone else's", 'Social gathering', 'Other'],
 };
+
+const formatTimeInput = (date: Date) => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
 
 export const QuickSmokingLogModal: React.FC<QuickSmokingLogModalProps> = ({ isOpen, onClose }) => {
   const { locale } = useLanguage();
@@ -42,6 +45,10 @@ export const QuickSmokingLogModal: React.FC<QuickSmokingLogModalProps> = ({ isOp
   const [decision, setDecision] = useState<DecisionType | null>(null);
   const [enjoyment, setEnjoyment] = useState<EnjoymentRating | null>(null);
   const [saved, setSaved] = useState(false);
+  const [timeMode, setTimeMode] = useState<TimeMode>('now');
+  const [customTime, setCustomTime] = useState(formatTimeInput(new Date()));
+  const [timeOpen, setTimeOpen] = useState(false);
+  const [customOpen, setCustomOpen] = useState(false);
   const savedEventRef = useRef<SmokingEvent | null>(null);
   const savingRef = useRef(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,6 +66,10 @@ export const QuickSmokingLogModal: React.FC<QuickSmokingLogModalProps> = ({ isOp
     setDecision(null);
     setEnjoyment(null);
     setSaved(false);
+    setTimeMode('now');
+    setCustomTime(formatTimeInput(new Date()));
+    setTimeOpen(false);
+    setCustomOpen(false);
     savedEventRef.current = null;
     savingRef.current = false;
   }, [isOpen, locale]);
@@ -72,12 +83,47 @@ export const QuickSmokingLogModal: React.FC<QuickSmokingLogModalProps> = ({ isOp
         : question === 'decision' ? Boolean(decision)
           : Boolean(enjoyment);
 
+  const eventTimestamp = () => {
+    const now = new Date();
+    if (timeMode === 'minus15') return new Date(now.getTime() - 15 * 60_000).toISOString();
+    if (timeMode === 'minus30') return new Date(now.getTime() - 30 * 60_000).toISOString();
+    if (timeMode === 'custom') {
+      const [hours, minutes] = customTime.split(':').map(Number);
+      if (Number.isFinite(hours) && Number.isFinite(minutes)) {
+        const selected = new Date(now);
+        selected.setSeconds(0, 0);
+        selected.setHours(hours, minutes, 0, 0);
+        if (selected.getTime() > now.getTime()) selected.setDate(selected.getDate() - 1);
+        return selected.toISOString();
+      }
+    }
+    return now.toISOString();
+  };
+
+  const timeLabel = timeMode === 'now'
+    ? (de ? 'Jetzt' : 'Now')
+    : timeMode === 'minus15'
+      ? '-15 Min'
+      : timeMode === 'minus30'
+        ? '-30 Min'
+        : customTime;
+
+  const chooseTime = (mode: TimeMode) => {
+    setTimeMode(mode);
+    if (mode === 'custom') {
+      setCustomOpen(true);
+      return;
+    }
+    setCustomOpen(false);
+    setTimeOpen(false);
+  };
+
   const save = () => {
     if (savingRef.current || !trigger || !decision) return;
     savingRef.current = true;
     const event: SmokingEvent = {
       id: `smoke_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-      timestamp: new Date().toISOString(),
+      timestamp: eventTimestamp(),
       trigger,
       place: place || undefined,
       cravingIntensity: intensity || undefined,
@@ -111,8 +157,65 @@ export const QuickSmokingLogModal: React.FC<QuickSmokingLogModalProps> = ({ isOp
     </div>
   );
 
+  const headerTime = (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setTimeOpen((open) => !open)}
+        aria-expanded={timeOpen}
+        className="inline-flex h-9 items-center gap-1.5 rounded-full border border-[#D8D0C7] bg-[#FFFDF8] px-3 text-[11px] font-semibold text-[#514B45] shadow-[0_2px_8px_rgba(42,37,33,.04)] transition hover:border-[#BDB2A5]"
+      >
+        <Clock className="h-3.5 w-3.5 text-[#24584A]" />
+        <span>{timeLabel}</span>
+      </button>
+      {timeOpen && (
+        <div className="absolute right-0 top-11 z-30 w-48 rounded-2xl border border-[#E5DACB] bg-[#FFFDF8] p-2 shadow-[0_18px_36px_rgba(42,37,33,.16)]">
+          <div className="grid gap-1">
+            {([
+              ['now', de ? 'Jetzt' : 'Now'],
+              ['minus15', '-15 Min'],
+              ['minus30', '-30 Min'],
+              ['custom', de ? 'Freie Zeit' : 'Custom time'],
+            ] as [TimeMode, string][]).map(([mode, label]) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => chooseTime(mode)}
+                className={`min-h-9 rounded-xl px-3 text-left text-xs font-semibold transition ${timeMode === mode ? 'bg-[#E1EFE7] text-[#24584A]' : 'text-[#514B45] hover:bg-[#F1EADF]'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          {customOpen && (
+            <div className="mt-2 border-t border-[#EEE5DA] pt-2">
+              <input
+                type="time"
+                value={customTime}
+                onChange={(event) => setCustomTime(event.target.value)}
+                onBlur={() => {
+                  setTimeMode('custom');
+                  setTimeOpen(false);
+                }}
+                className="h-10 w-full rounded-xl border border-[#D8D0C7] bg-white px-3 text-sm font-semibold text-[#2A2521] outline-none focus:border-[#24584A]"
+                aria-label={de ? 'Freie Uhrzeit' : 'Custom time'}
+              />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <ModalSheet isOpen={isOpen} onClose={() => onClose(savedEventRef.current || undefined)} closeDisabled={saved} title={de ? 'Zigarette erfassen' : 'Log cigarette'} badge={`${step + 1} / ${questions.length}`}>
+    <ModalSheet
+      isOpen={isOpen}
+      onClose={() => onClose(savedEventRef.current || undefined)}
+      closeDisabled={saved}
+      title={de ? 'Zigarette erfassen' : 'Log cigarette'}
+      badge={`${step + 1} / ${questions.length}`}
+      headerAction={saved ? undefined : headerTime}
+    >
       <div className="space-y-5 py-2 text-[#2A2521]">
         <div className="h-1.5 overflow-hidden rounded-full bg-[#EEE5DA]"><div className="h-full rounded-full bg-[#24584A] transition-all" style={{ width: `${((step + 1) / questions.length) * 100}%` }} /></div>
 
