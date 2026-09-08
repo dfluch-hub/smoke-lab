@@ -23,6 +23,7 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className?: string) =
 };
 
 const svgEl = <K extends keyof SVGElementTagNameMap>(tag: K) => document.createElementNS(SVG_NS, tag);
+const isGerman = () => (document.documentElement.lang || 'de').toLowerCase().startsWith('de');
 
 const isBreathingProtocol = (root: HTMLElement) => {
   const text = root.textContent?.toLowerCase() || '';
@@ -82,8 +83,14 @@ class PremiumTimerController {
 
     if (this.total >= 150) this.host.append(this.createWave());
 
-    source.style.display = 'none';
-    source.parentElement?.insertBefore(this.host, source);
+    const legacyContainer = source.parentElement;
+    if (legacyContainer) {
+      legacyContainer.style.display = 'none';
+      legacyContainer.parentElement?.insertBefore(this.host, legacyContainer);
+    } else {
+      source.style.display = 'none';
+      source.parentElement?.insertBefore(this.host, source);
+    }
 
     this.update(initialSeconds, true);
     this.observer = new MutationObserver(() => {
@@ -118,17 +125,17 @@ class PremiumTimerController {
   }
 
   private waveY(progress: number) {
-    const x = progress;
-    const gaussian = Math.exp(-Math.pow((x - 0.5) / 0.235, 2));
+    const gaussian = Math.exp(-Math.pow((progress - 0.5) / 0.235, 2));
     return 76 - gaussian * 58;
   }
 
   private getBreathPhase(remaining: number) {
+    const de = isGerman();
     const elapsed = Math.max(0, this.total - remaining);
     const phaseSecond = elapsed % 19;
-    if (phaseSecond < 4) return { key: 'inhale', label: 'Einatmen…', className: 'is-inhale' };
-    if (phaseSecond < 11) return { key: 'hold', label: 'Halten…', className: 'is-hold' };
-    return { key: 'exhale', label: 'Ausatmen…', className: 'is-exhale' };
+    if (phaseSecond < 4) return { key: 'inhale', label: de ? 'Einatmen…' : 'Inhale…', className: 'is-inhale' };
+    if (phaseSecond < 11) return { key: 'hold', label: de ? 'Halten…' : 'Hold…', className: 'is-hold' };
+    return { key: 'exhale', label: de ? 'Ausatmen…' : 'Exhale…', className: 'is-exhale' };
   }
 
   private update(remaining: number, initial = false) {
@@ -145,7 +152,9 @@ class PremiumTimerController {
       if (!initial && next.key !== this.lastPhase) safeVibrate(30);
       this.lastPhase = next.key;
     } else {
-      this.phase.textContent = remaining === 0 ? 'Geschafft.' : 'Bleib bei der Welle';
+      this.phase.textContent = remaining === 0
+        ? (isGerman() ? 'Geschafft.' : 'Done.')
+        : (isGerman() ? 'Bleib bei der Welle' : 'Stay with the wave');
     }
 
     if (this.waveDot) {
@@ -156,8 +165,8 @@ class PremiumTimerController {
       this.waveDot.setAttribute('cy', y.toFixed(1));
       if (this.waveNote) {
         this.waveNote.textContent = progress >= 0.5
-          ? 'Der Peak ist überschritten – der Drang flaut jetzt ab.'
-          : 'Die Welle steigt an. Du musst ihr nicht folgen.';
+          ? (isGerman() ? 'Der Peak ist überschritten – der Drang flaut jetzt ab.' : 'The peak has passed – the urge is easing now.')
+          : (isGerman() ? 'Die Welle steigt an. Du musst ihr nicht folgen.' : 'The wave is rising. You do not have to follow it.');
       }
     }
   }
