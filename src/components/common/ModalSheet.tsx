@@ -11,6 +11,7 @@ interface ModalSheetProps {
   onBack?: () => void;
   closeDisabled?: boolean;
   closeOnBackdrop?: boolean;
+  headerAction?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -31,6 +32,7 @@ export const ModalSheet: React.FC<ModalSheetProps> = ({
   onBack,
   closeDisabled = false,
   closeOnBackdrop = true,
+  headerAction,
   children,
 }) => {
   const { t } = useLanguage();
@@ -125,9 +127,9 @@ export const ModalSheet: React.FC<ModalSheetProps> = ({
               <div className="h-1 w-9 rounded-full bg-[#D9D9D4]" />
             </div>
 
-            {(title || badge) && (
+            {(title || badge || headerAction) && (
               <div className="mb-4 flex items-start justify-between gap-3 border-b border-[#D9D9D4] pb-3">
-                <div className="flex items-center gap-2">
+                <div className="flex min-w-0 items-center gap-2">
                   {onBack && (
                     <button
                       type="button"
@@ -139,31 +141,34 @@ export const ModalSheet: React.FC<ModalSheetProps> = ({
                       <ArrowLeft className="w-4 h-4 stroke-[2]" aria-hidden="true" />
                     </button>
                   )}
-                  <div>
+                  <div className="min-w-0">
                     {badge && (
                       <span className="inline-block rounded-md bg-[#E7E7E3] px-2 py-0.5 text-[10px] font-mono tracking-wider text-[#191B1C] uppercase mb-1">
                         {badge}
                       </span>
                     )}
                     {title && (
-                      <h3 id={titleId} className="font-ui text-base sm:text-lg font-medium text-[#191B1C] leading-tight tracking-tight">
+                      <h3 id={titleId} className="font-ui text-base sm:text-lg font-medium text-[#191B1C] leading-tight tracking-tight truncate">
                         {title}
                       </h3>
                     )}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  id="btn-sheet-close"
-                  onClick={() => {
-                    if (!closeDisabled) onClose();
-                  }}
-                  disabled={closeDisabled}
-                  className="h-11 w-11 inline-flex items-center justify-center rounded-lg text-[#747779] hover:text-[#191B1C] hover:bg-[#E7E7E3] transition disabled:opacity-40 disabled:cursor-not-allowed"
-                  aria-label={t('close')}
-                >
-                  <X className="w-4 h-4 stroke-[2]" aria-hidden="true" />
-                </button>
+                <div className="ml-auto flex shrink-0 items-center gap-1.5">
+                  {headerAction}
+                  <button
+                    type="button"
+                    id="btn-sheet-close"
+                    onClick={() => {
+                      if (!closeDisabled) onClose();
+                    }}
+                    disabled={closeDisabled}
+                    className="h-11 w-11 inline-flex items-center justify-center rounded-lg text-[#747779] hover:text-[#191B1C] hover:bg-[#E7E7E3] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                    aria-label={t('close')}
+                  >
+                    <X className="w-4 h-4 stroke-[2]" aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             )}
 
